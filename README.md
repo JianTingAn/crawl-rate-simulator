@@ -1,50 +1,22 @@
-﻿# crawl-rate-simulator
+# 抓取速率模拟器
 
-This is an independent open-source project in the Baidu Crawler Open Source series. It focuses on real crawler observability, including access-log analysis, Sitemap and robots.txt checks, HTTP status monitoring, canonical validation, response performance, and content-change detection.
+用本地数据模拟不同并发度、延迟和 URL 队列下的检查耗时，帮助规划服务器可承受的抓取与监测节奏。
 
-## Detailed introduction
+## 核心功能
+- 估算队列完成时间
+- 比较并发度和延迟变化
+- 识别可能造成压力的参数
+- 输出便于评审的 JSON 数据
 
-The tool is designed for site owners, developers, and SEO operations teams who need reproducible evidence about how a site is being accessed. It analyzes local CSV or JSON-derived data and produces machine-readable results. The User-Agent classifier is only a log label; it does not prove that a request came from official search-engine infrastructure.
-
-This project does not forge search-engine identity, generate fake spider traffic, manipulate rankings, bypass access controls, or promise indexing results. Use low request rates, respect robots.txt, and monitor only sites and data you are permitted to inspect.
-
-## Features
-
-- Offline demo mode with deterministic sample data
-- CSV input with url,status,user_agent,ms columns
-- Status-code aggregation and slow-request count
-- Search-bot User-Agent classification
-- JSON output for scheduled jobs and dashboards
-- No cloud service, credential, or third-party dependency required
-
-## Quick start
-
-Requires Python 3.10 or newer:
-
-`powershell
+## 使用
+```powershell
 python tool.py --demo
-python tool.py --demo --json
 python tool.py --input sample.csv --json
-`
+```
+模拟器用于容量规划，不用于对百度或其他搜索引擎发送请求，也不用于制造蜘蛛访问量。
 
-## CSV format
+官网：https://jta.mobi  
+QQ群：1039545483
 
-`csv
-url,status,user_agent,ms
-https://example.com/,200,Mozilla/5.0 (compatible; Baiduspider/2.0),180
-`
-
-## Result interpretation
-
-- statuses: counts by HTTP status. Review 4xx, 5xx, and unexpected redirects.
-- ot_classes: a User-Agent classification only, not an authenticity verification.
-- slow_requests: responses taking at least 1000 milliseconds.
-
-## Contact
-
-Website: https://jta.mobi  
-QQ group: 1039545483
-
-## License
-
+## 许可证
 MIT License
